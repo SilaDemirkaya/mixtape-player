@@ -1,23 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thinking of You Station 💭</title>
+  <title>Burak İçin Mixtape 💛</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
 </head>
 <body>
+  <div class="heart-container">
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+  </div>
+  
   <div class="player-container">
-    <h1>🎧 Thinking of You Station 💭</h1>
-    <p class="description">Just press play — and think of me.</p>
+    <h1>🎧 Burak’ın Radyosu</h1>
+    <p class="description">Her tuşa bastığında biraz daha yaklaşıyoruz…</p>
 
-    <!-- Cassette Image -->
-    <img src="assets/images/recordmachine.avif" alt="record machine" class="cassette" />
+    <!-- Plak Görseli -->
+    <img src="assets/images/recordmachine.avif" alt="Plak" class="cassette" />
 
-    <!-- Song Selector -->
+    <!-- Albüm kapakları (gizli) -->
+    <img id="cover-0" src="assets/covers/dilerimki.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-1" src="assets/covers/sevdindiye.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-2" src="assets/covers/islansin.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-3" src="assets/covers/birbildiginvardir.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-4" src="assets/covers/sanabukadar.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-5" src="assets/covers/stilllovingyou.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-6" src="assets/covers/somebodytolove.png" crossorigin="anonymous" style="display: none;" />
+    <img id="cover-7" src="assets/covers/noonelikeyou.png" crossorigin="anonymous" style="display: none;" />
+
+    <!-- Şarkı Seçimi -->
     <div class="song-buttons">
       <button onclick="switchSong(0)">Dilerim Ki</button>
       <button onclick="switchSong(1)">Sevdin Diye Mi</button>
+      <button onclick="switchSong(2)">Islansin</button>
+      <button onclick="switchSong(3)">Bir Bildigin Vardir</button>
+      <button onclick="switchSong(4)">Sana Bu Kadar Uzakken</button>
+      <button onclick="switchSong(5)">Still Loving You</button>
+      <button onclick="switchSong(6)">Somebody to Love</button>
+      <button onclick="switchSong(7)">No One Like You</button>
     </div>
 
     <!-- Spotify iframe -->
@@ -31,18 +56,61 @@
       </iframe>
     </div>
 
-    <p class="message">Your mixtape is always playing — no matter the distance. 🎶</p>
+    <p class="message">
+      Bu radyoda hep sen varsın Burak 💛<br />
+      Her şarkıda seni biraz daha özlüyorum.<br />
+      Uzakta olsan da, kalbim hep senin yanında.
+    </p>
   </div>
 
   <script>
     const songs = [
-      "https://open.spotify.com/embed/track/6cjIlxXM1ca6nxkJ0p27jU", // Dilerim Ki
-      "https://open.spotify.com/embed/track/20pZiwzG0Pa1Exsh273YYH"  // Sevdin Diye Mi
+      "https://open.spotify.com/embed/track/6cjIlxXM1ca6nxkJ0p27jU",
+      "https://open.spotify.com/embed/track/20pZiwzG0Pa1Exsh273YYH",
+      "https://open.spotify.com/embed/track/5OuQxqw8BIflUuJXxCLknH",
+      "https://open.spotify.com/embed/track/30AIltFnZ2viseRTFedAym",
+      "https://open.spotify.com/embed/track/0QVVOMUDgLOixwS9V8Q66o",
+      "https://open.spotify.com/embed/track/0RdUX4WE0fO30VnlUbDVL6",
+      "https://open.spotify.com/embed/track/4rDbp1vnvEhieiccprPMdI",
+      "https://open.spotify.com/embed/track/5hVepr5CHiTGtJY5bP4i5n"
     ];
+
+    const colorThief = new ColorThief();
 
     function switchSong(index) {
       const frame = document.getElementById("spotify-frame");
       frame.src = songs[index] + "?utm_source=generator";
+
+      const buttons = document.querySelectorAll('.song-buttons button');
+      buttons.forEach(btn => btn.classList.remove("active-song"));
+      buttons[index].classList.add("active-song");
+
+      const img = document.getElementById(`cover-${index}`);
+      if (img.complete) {
+        applyColors(img);
+      } else {
+        img.addEventListener('load', () => applyColors(img));
+      }
+    }
+
+    function applyColors(img) {
+      const color = colorThief.getColor(img);
+      const rgb = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+
+      document.body.style.background = `linear-gradient(to bottom, ${rgb}, #ffffff)`;
+
+      const buttons = document.querySelectorAll('.song-buttons button');
+      buttons.forEach(btn => {
+        if (!btn.classList.contains("active-song")) {
+          btn.style.backgroundColor = rgb;
+          btn.style.color = getTextColorBasedOnBackground(color);
+        }
+      });
+    }
+
+    function getTextColorBasedOnBackground([r, g, b]) {
+      const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+      return brightness > 125 ? "black" : "white";
     }
   </script>
 </body>
