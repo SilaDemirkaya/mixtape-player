@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thinking of You Station 💭</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="player-container">
+    <h1>🎧 Thinking of You Station 💭</h1>
+    <p class="description">Just press play — and think of me.</p>
+
+    <!-- Cassette Image -->
+    <img src="assets/images/recordmachine.avif" alt="record machine" class="cassette" />
+
+    <!-- Song Selector -->
+    <div class="song-buttons">
+      <button onclick="switchSong(0)">Dilerim Ki</button>
+      <button onclick="switchSong(1)">Sevdin Diye Mi</button>
+    </div>
+
+    <!-- Spotify iframe -->
+    <div class="spotify-player">
+      <iframe id="spotify-frame"
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/6cjIlxXM1ca6nxkJ0p27jU?utm_source=generator"
+        width="100%" height="352" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <p class="message">Your mixtape is always playing — no matter the distance. 🎶</p>
+  </div>
+
+  <script>
+    const songs = [
+      "https://open.spotify.com/embed/track/6cjIlxXM1ca6nxkJ0p27jU", // Dilerim Ki
+      "https://open.spotify.com/embed/track/20pZiwzG0Pa1Exsh273YYH"  // Sevdin Diye Mi
+    ];
+
+    function switchSong(index) {
+      const frame = document.getElementById("spotify-frame");
+      frame.src = songs[index] + "?utm_source=generator";
+    }
+  </script>
+</body>
+</html>

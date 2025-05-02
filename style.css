@@ -1,0 +1,64 @@
+body {
+    background: linear-gradient(to bottom, #fceabb, #f8b500);
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    color: #333;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .player-container {
+    max-width: 500px;
+    margin: auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .cassette {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .song-buttons {
+    margin-bottom: 1rem;
+  }
+  
+  .song-buttons button {
+    background: #f8b500;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+  }
+  
+  .song-buttons button:hover {
+    background: #e3a100;
+  }
+  
+  .spotify-player {
+    margin-bottom: 1rem;
+  }
+  
+  .message {
+    font-style: italic;
+    color: #888;
+    margin-top: 1rem;
+  }
+  
