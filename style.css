@@ -42,7 +42,7 @@ h1 {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: url("assets/icons/pixelheart1.png") no-repeat center/contain;
+  background: url("assets/icons/heart.png") no-repeat center/contain;
   animation: float 8s infinite ease-in-out;
   opacity: 0.8;
 }
